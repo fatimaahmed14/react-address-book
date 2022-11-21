@@ -1,10 +1,38 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const initialFormState = {
+  firstName: "",
+  lastName: "",
+  street: "",
+  city: "",
+};
+
 function ContactsAdd(props) {
-  // to this component so new contacts can be added to the
-  // state
+  const [formState, setFormState] = useState(initialFormState);
   const { setContacts, contacts } = props;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormState(initialFormState);
+  };
+
+  const handleChange = (e) => {
+    const targetName = e.target.name;
+    const targetValue = e.target.value;
+    if (targetName === "firstName") {
+      setFormState({ ...formState, firstName: targetValue });
+    }
+    if (targetName === "lastName") {
+      setFormState({ ...formState, lastName: targetValue });
+    }
+    if (targetName === "street") {
+      setFormState({ ...formState, street: targetValue });
+    }
+    if (targetName === "city") {
+      setFormState({ ...formState, city: targetValue });
+    }
+  };
 
   //TODO: Implement controlled form
   //send POST to json server on form submit

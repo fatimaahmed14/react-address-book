@@ -7,6 +7,7 @@ import "./styles/styles.css";
 
 export default function App() {
   const [contacts, setContacts] = useState([]);
+  const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:4000/contacts")
@@ -14,6 +15,9 @@ export default function App() {
       .then((contactData) => setContacts(contactData));
   }, []);
 
+  const submitFalse = () => {
+    setSubmit(false);
+  };
   return (
     <>
       <nav>
@@ -30,7 +34,12 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<ContactsList contacts={contacts} />} />
-          <Route path="/contacts/add" element={<ContactsView />} />
+          <Route
+            path="/contacts/add"
+            element={
+              <ContactsAdd setContacts={setContacts} contacts={contacts} />
+            }
+          />
           <Route path="contacts/:id" element={<ContactsView />} />
         </Routes>
       </main>
