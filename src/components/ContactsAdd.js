@@ -10,12 +10,7 @@ const initialFormState = {
 
 function ContactsAdd(props) {
   const [formState, setFormState] = useState(initialFormState);
-  const { setContacts, contacts } = props;
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormState(initialFormState);
-  };
+  const { setContacts, contacts, submit, setSubmit } = props;
 
   const handleChange = (e) => {
     const targetName = e.target.name;
@@ -34,11 +29,38 @@ function ContactsAdd(props) {
     }
   };
 
-  //TODO: Implement controlled form
-  //send POST to json server on form submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newContactData = {
+      firstName: formState.firstName,
+      lastName: formState.lastName,
+      street: formState.street,
+      city: formState.city,
+    };
+    const uri = "http://localhost:4000/contacts";
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(newContactData),
+    };
+    fetch(uri, options)
+      .then((response) => {
+        return response.json();
+      })
+      .then((newContacts) => {
+        const updatedContacts = [...contacts, newContacts];
+        setContacts(updatedContacts);
+      });
+    setFormState(initialFormState);
+    setSubmit(true);
+  };
 
   return (
-    <form className="form-stack contact-form">
+    <form className="form-stack contact-form" onSubmit={handleSubmit}>
       <h2>Create Contact</h2>
 
       <label htmlFor="firstName">First Name</label>
@@ -57,7 +79,7 @@ function ContactsAdd(props) {
         name="lastName"
         type="text"
         required
-        value={formState.lasstName}
+        value={formState.lastName}
         onChange={handleChange}
       />
 

@@ -13,7 +13,7 @@ export default function App() {
     fetch("http://localhost:4000/contacts")
       .then((res) => res.json())
       .then((contactData) => setContacts(contactData));
-  }, []);
+  }, [submit]);
 
   const submitFalse = () => {
     setSubmit(false);
@@ -24,10 +24,14 @@ export default function App() {
         <h2>Menu</h2>
         <ul>
           <li>
-            <Link to="/">Contacts List{""}</Link>
+            <Link to="/" onClick={submitFalse}>
+              Contacts List{""}
+            </Link>
           </li>
           <li>
-            <Link to="/contacts/add">Add New Contact</Link>
+            <Link to="/contacts/add" onClick={submitFalse}>
+              Add New Contact
+            </Link>
           </li>
         </ul>
       </nav>
