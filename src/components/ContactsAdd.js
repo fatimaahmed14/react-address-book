@@ -6,6 +6,9 @@ const initialFormState = {
   lastName: "",
   street: "",
   city: "",
+  email: "",
+  linkdin: "",
+  twitter: "",
 };
 
 function ContactsAdd(props) {
@@ -27,6 +30,15 @@ function ContactsAdd(props) {
     if (targetName === "city") {
       setFormState({ ...formState, city: targetValue });
     }
+    if (targetName === "email") {
+      setFormState({ ...formState, email: targetValue });
+    }
+    if (targetName === "linkdin") {
+      setFormState({ ...formState, linkdin: targetValue });
+    }
+    if (targetName === "twitter") {
+      setFormState({ ...formState, twitter: targetValue });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -37,6 +49,9 @@ function ContactsAdd(props) {
       lastName: formState.lastName,
       street: formState.street,
       city: formState.city,
+      email: formState.email,
+      linkdin: formState.linkdin,
+      twitter: formState.twitter,
     };
     const uri = "http://localhost:4000/contacts";
     const options = {
@@ -100,6 +115,36 @@ function ContactsAdd(props) {
         type="text"
         required
         value={formState.city}
+        onChange={handleChange}
+      />
+
+      <label htmlFor="email">Email:</label>
+      <input
+        id="email"
+        name="email"
+        type="text"
+        required
+        value={formState.email}
+        onChange={handleChange}
+      />
+
+      <label htmlFor="linkdin">Linkdin:</label>
+      <input
+        id="linkdin"
+        name="linkdin"
+        type="text"
+        required
+        value={formState.linkdin}
+        onChange={handleChange}
+      />
+
+      <label htmlFor="twitter">Twitter:</label>
+      <input
+        id="twitter"
+        name="twitter"
+        type="text"
+        required
+        value={formState.twitter}
         onChange={handleChange}
       />
 

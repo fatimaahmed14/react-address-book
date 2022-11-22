@@ -23,8 +23,10 @@ function ContactsView() {
         {contact.firstName} {contact.lastName}
       </h2>
       <p>
-        {contact.street} {contact.city}
+        Address: {contact.street} {contact.city}
       </p>
+      <p>Linkdin: {contact.linkdin}</p>
+      <p>Twitter: {contact.twitter}</p>
     </div>
   );
 }
